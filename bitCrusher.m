@@ -17,14 +17,14 @@ sampleRate = deviceReader.SampleRate; % Hz
 frameSize = deviceReader.SamplesPerFrame; % In samples
 
 % Set up circular buffer
-delaySeconds = 10E-3; % Desired echo delay in seconds (>100ms)
+delaySeconds = 1; % Desired echo delay in seconds (>100ms)
 R = round(sampleRate*delaySeconds); % Delay in samples aka buffer size
 circBuffer = zeros(1,R+1); % Circular buffer
 newest = 0; % Buffer index for newest incoming audio sample
 oldest = 0; % Buffer index for oldest saved audio sample in buffer
 
 % Set up DSP algorithm
-K = 9; % Levels allowed
+K = 1+2^4; % Levels allowed
 scale = (K-1)/2;
 
 frameOut = zeros(1,frameSize); % Output audio frame
